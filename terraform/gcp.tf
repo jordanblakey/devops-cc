@@ -1,22 +1,22 @@
 provider "google" {
   credentials = file("terraform-sa-key.json")
-  project     = var.gcp_project_id
+  project     = "devops-cc-project"
   region      = "us-central1"
-  zone        = "us-central1-c"
+  zone        = "us-central"
   version     = "~> 3.38"
 }
 
-# IP ADDRESS
+# Static IP Address
 resource "google_compute_address" "ip_address" {
   name = "storybooks-ip-${terraform.workspace}"
 }
 
-# NETWORK
+# Network
 data "google_compute_network" "default" {
   name = "default"
 }
 
-# FIREWALL RULE
+# Firewall Rule
 resource "google_compute_firewall" "allow_http" {
   name    = "allow-http-${terraform.workspace}"
   network = data.google_compute_network.default.name
@@ -31,13 +31,12 @@ resource "google_compute_firewall" "allow_http" {
   target_tags = ["allow-http-${terraform.workspace}"]
 }
 
-# OS IMAGE
+# OS Image
 data "google_compute_image" "cos_image" {
   family  = "cos-81-lts"
   project = "cos-cloud"
 }
 
-# COMPUTE ENGINE INSTANCE
 resource "google_compute_instance" "instance" {
   name         = "${var.app_name}-vm-${terraform.workspace}"
   machine_type = var.gcp_machine_type
