@@ -1,5 +1,6 @@
 terraform {
   backend "gcs" {
+    credentials = "terraform-sa-key.json"
     bucket = "devops-cc-project-terraform"
     prefix = "/state/storybooks"
   }

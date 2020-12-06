@@ -262,4 +262,12 @@ Using the terraform config requires:
 
 ## Github Action
 
-`.github/workflows/build-push-deploy.yaml` contains a workflow which deploys to a staging environment on pushes to the `master` branch and to a production environment on pushes of tags of the form `v#.#.#`.
+`.github/workflows/build-push-deploy.yaml` contains a workflow which deploys to a staging environment on pushes to the `master` branch and to a production environment on pushes of tags of the form.
+
+```sh
+# Test CloudFlare API Token
+curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+     -H "Authorization: Bearer yMJB4ylBJ2jY8eUTVQwu6U4sAC4HIxooeJUgIkY7" \
+     -H "Content-Type:application/json"
+
+```

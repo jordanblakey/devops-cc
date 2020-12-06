@@ -9,6 +9,7 @@ provider "google" {
 # Static IP Address
 resource "google_compute_address" "ip_address" {
   name = "storybooks-ip-${terraform.workspace}"
+  # address = "35.184.168.69"
 }
 
 # Network
